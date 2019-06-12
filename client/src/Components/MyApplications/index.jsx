@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import myApplicationsData from '../utils/myApplications';
-
+import OfferCard from '../CommonComponents/OfferCard'
 import './style.css';
 
 export default class MyApplications extends React.Component {
@@ -25,7 +25,15 @@ export default class MyApplications extends React.Component {
           {myApplications
             ? myApplications.map(item => {
                 
-                  console.log(item);
+                return (
+                    <OfferCard
+                      hover
+                      offer={item}
+                      key={item.id}
+                      saved={item.saved}
+                      status={item.status}
+                    />
+                  );
                   
                 
               })
