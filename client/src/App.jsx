@@ -10,7 +10,9 @@ import {
   Header,
   Footer,
   PageNotFound,
+  
 } from './Components';
+import MyApplications from './Components/MyApplications';
 
 
 export default class App extends Component{
@@ -29,6 +31,7 @@ export default class App extends Component{
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/myapps" component={MyApplications} />
             <Route component={PageNotFound} />
           </Switch>
           <Footer />
