@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Nav, Col, Dropdown } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Notifications from '../Header/Notifications'
 import './style.css';
 
 class Header extends Component {
@@ -105,6 +106,10 @@ class Header extends Component {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+              </Col>
+              <Col md="auto">
+                {/* show notificatios component */}
+                <Notifications />
               </Col>
 
             </>
