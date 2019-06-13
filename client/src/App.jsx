@@ -10,6 +10,7 @@ import {
   MyOffers,
   MyApplications,
   SavedOffers,
+  CreateNewOffers,
   Header,
   Footer,
   PageNotFound,
@@ -37,7 +38,9 @@ export default class App extends Component{
             <Route exact path="/app/my-offers" component={MyOffers} />
             <Route exact path="/app/my-applications" component={MyApplications} />
             <Route exact path="/app/saved-offers" component={SavedOffers} />
+            <Route exact path="/app/new-offer" component={CreateNewOffers} />
 
+            
             
             <Route component={PageNotFound} />
           </Switch>

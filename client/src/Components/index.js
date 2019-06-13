@@ -8,7 +8,7 @@ import PageNotFound from './PageNotFound'
 import MyOffers from './MyOffers'
 import MyApplications from './MyApplications'
 import SavedOffers from './SavedOffers'
-
+import CreateNewOffers from './CreateNewOffers'
 export {
   LandingPage,
   Login,
@@ -19,5 +19,6 @@ export {
   MyOffers,
   PageNotFound,
   MyApplications,
-  SavedOffers
+  SavedOffers,
+  CreateNewOffers
 };
