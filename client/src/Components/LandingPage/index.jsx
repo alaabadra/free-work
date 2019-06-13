@@ -2,6 +2,7 @@ import React from 'react';
 
 import './style.css';
 
+import Slider from './Slider';
 
 export default function LandingPage() {
   return (
@@ -13,6 +14,7 @@ export default function LandingPage() {
         </h2>
       </section>
       <h2 className="landing__title landing__title--center">Success stories</h2>
+      <Slider />
       <section className="landing__aboutus">
         <div className="landing__info">
           <h2 className="landing__title">About us</h2>
