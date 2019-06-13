@@ -8,12 +8,13 @@ import {
   Signup,
   Home,
   MyOffers,
+  MyApplications,
+  SavedOffers,
   Header,
   Footer,
   PageNotFound,
   
 } from './Components';
-import MyApplications from './Components/MyApplications';
 
 
 export default class App extends Component{
@@ -35,6 +36,9 @@ export default class App extends Component{
            
             <Route exact path="/app/my-offers" component={MyOffers} />
             <Route exact path="/app/my-applications" component={MyApplications} />
+            <Route exact path="/app/saved-offers" component={SavedOffers} />
+
+            
             <Route component={PageNotFound} />
           </Switch>
           <Footer />
