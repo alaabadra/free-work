@@ -29,8 +29,6 @@ class MyOffers extends Component {
         <Row>
           {offers ? (
             offers.map(item => {
-                console.log(item);
-                
               return (
                 <Col xs={12} md={6} lg={4} key={item.id}>
                   <Card
