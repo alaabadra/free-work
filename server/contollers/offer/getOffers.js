@@ -1,5 +1,5 @@
   
-const {getOffers} = require('../../database/queries/getOffers')
+const {getOffers} = require('../../database/queries/offers/getOffers')
 module.exports = (req, res, next) => {
     getOffers(req.params.offset)
     .then((result) => {
