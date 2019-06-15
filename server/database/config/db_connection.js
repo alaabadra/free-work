@@ -1,3 +1,4 @@
+    
 const { Pool } = require('pg');
 require('dotenv').config();
 
@@ -13,3 +14,4 @@ switch (process.env.NODE_ENV) {
 module.exports = new Pool({
   connectionString,
 });
+
