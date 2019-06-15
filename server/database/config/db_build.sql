@@ -1,3 +1,4 @@
+
 BEGIN;
 
 DROP TABLE IF EXISTS member, offer, application, skill, review, profession, 
