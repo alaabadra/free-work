@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const {
   authentication,
-  application,
+  applications,
   filter,
   member,
   offer,
@@ -20,14 +20,16 @@ router.post('/login', authentication.login);
 router.get('/logout', authentication.logout);
 
 /* Application */
-router.get('/offer-applications/:offerId', application.getOfferApplication);
+// router.get('/offer-applications/:offerId', applications.getOfferApplication);////for page offerdetails for owner(all apps for his offers)
 
-router.get('/my-applications/:memberId', application.getMyApplication);
+router.get('/:memberId/my-applications', application.getMyApplications);
+router.get('/:memberId/my-application/:offerId', application.getMyApplication);//for page offerdetails for user (specail app for this user for this offer)
 
-router.post('/applications', application.addApplication);
 
-router.post('/hired_member', application.addHireMember);
-router.patch('/hired_member/:memberId', application.updateHireMember);
+router.post('/applications', applications.addApplication);
+
+router.post('/hired_member', applications.addHireMember);
+router.patch('/hired_member/:memberId', applications.updateHireMember);
 
 /* filter */
 router.route('/filter/:member_id')
@@ -40,7 +42,7 @@ router.post('/members', member.addMember);
 
 /* Offer */
 router.get('/offers/:offset', offer.getOffers);
-router.get('/offer/:offerId', offer.getOfferDetails);
+router.get('/offer/:offerId', offer.getOfferDetails);//////for offerDetails to show offer in this page (owner , user)
 router.post('/offers', offer.addOffer);
 router.delete('/offers/:offerId', offer.deleteOffer);
 
