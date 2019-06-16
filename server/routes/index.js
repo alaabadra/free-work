@@ -22,7 +22,8 @@ router.get('/logout', authentication.logout);
 /* Application */
 router.get('/offer-applications/:offerId', application.getOfferApplication);
 
-router.get('/my-applications/:memberId', application.getMyApplication);
+// router.get('/:memberId/my-applications', application.getMyApplications);
+router.get('/:memberId/my-applications/:offerId', application.getMyApplication);
 
 router.post('/applications', application.addApplication);
 
