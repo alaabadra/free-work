@@ -1,5 +1,5 @@
 const authentication = require('./authentication');
-const application = require('./applications');
+const applications = require('./applications');
 const filter = require('./filter');
 const member = require('./member');
 const offer = require('./offer');
@@ -9,7 +9,7 @@ const erros = require('./errors');
 
 module.exports = {
   authentication,
-  application,
+  applications,
   filter,
   member,
   offer,
