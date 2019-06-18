@@ -1,5 +1,5 @@
 
-const connection = require('../../database/config/db_connection');
+const connection = require('../../config/db_connection');
 
 exports.getOffers = offset => connection.query(`SELECT offer.* , COALESCE(json_agg(skill) FILTER (WHERE skill.id IS NOT NULL),'[]') AS skills,
 COALESCE(json_agg(offer_type) FILTER (WHERE skill.id IS NOT NULL),'[]') AS offer_types FROM offer
