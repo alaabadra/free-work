@@ -20,10 +20,10 @@ router.post('/login', authentication.login);
 router.get('/logout', authentication.logout);
 
 /* Application */
-router.get('/offer-applications/:offerId', applications.getOfferApplication);////for page offerdetails for owner(all apps for his offers)
+// router.get('/offer-applications/:offerId', applications.getOfferApplication);////for page offerdetails for owner(all apps for his offers)
 
 // router.get('/:memberId/my-applications', application.getMyApplications);
-router.get('/:memberId/my-applications/:offerId', application.getMyApplication);
+// router.get('/:memberId/my-applications/:offerId', application.getMyApplication);
 
 
 router.post('/applications', applications.addApplication);
