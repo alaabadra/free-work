@@ -13,6 +13,7 @@ import {
   Header,
   Footer,
   PageNotFound,
+  OfferDetails
   
 } from './Components';
 
@@ -37,6 +38,7 @@ export default class App extends Component{
             <Route exact path="/app/my-offers" component={MyOffers} />
             <Route exact path="/app/my-applications" component={MyApplications} />
             <Route exact path="/app/saved-offers" component={SavedOffers} />
+            <Route exact path="/app/offers/:offerId" component={OfferDetails} />
 
             
             <Route component={PageNotFound} />
