@@ -176,7 +176,34 @@ export default class OfferDetails extends Component {
             </Row>
              {/* {this.state.offer.id} */}
              {console.log(offer.description)}
-        
+        <Row>
+          <Col>
+                    <Row>
+                      <p>{offer.description}</p>
+                    
+                      <Col>
+                        <div>
+                        <SideCard title="skills" items={offer.skills} />
+         <SideCard title="offer type" items={offer.offer_types} />
+                        </div>
+                      </Col>
+                    </Row>
+          </Col>
+        </Row>
+        <Row>
+          {console.log(offer.member_id)}
+          {console.log(userInfo.id)}
+          {offer.member_id === userInfo.id ? (
+
+            <>
+              <Row>
+                Application
+              </Row>
+
+            </>
+          ):null}
+          
+        </Row>
          
           </Container>
         ) : (
