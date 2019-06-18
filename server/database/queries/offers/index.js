@@ -1,4 +1,4 @@
 
 const getOffers = require('./getOffers')
-
-module.exports = {getOffers};
+const getOfferDetails = require('./getOfferDetails')
+module.exports = {getOffers,getOfferDetails};
