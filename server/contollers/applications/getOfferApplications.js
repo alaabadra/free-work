@@ -16,4 +16,6 @@ module.exports = (req, res, next) => {
       });
     })
     .catch(() => next({ code: 500, msg: 'Internal Server Error!' }));
+  console.log('get offer');
+  
 };

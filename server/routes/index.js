@@ -10,6 +10,7 @@ const {
   skills,
   erros,
 } = require('../contollers');
+console.log('aaaaaaaaa',applications);
 
 router.get('/', (req, res) => {
     res.send('Server is running on 4000!!');
@@ -20,10 +21,10 @@ router.post('/login', authentication.login);
 router.get('/logout', authentication.logout);
 
 /* Application */
-router.get('/offer-applications/:offerId', applications.getOfferApplication);////for page offerdetails for owner(all apps for his offers)
+router.get('/offer-applications/:offerId', applications.getOfferApplications);////for page offerdetails for owner(all apps for his offers)
 
 // router.get('/:memberId/my-applications', application.getMyApplications);
-router.get('/:memberId/my-applications/:offerId', application.getMyApplication);
+router.get('/:memberId/my-applications/:offerId', applications.getMyApplication);
 
 
 router.post('/applications', applications.addApplication);

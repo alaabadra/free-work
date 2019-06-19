@@ -1,14 +1,10 @@
 //when go into page offerdetails (when click on card to show dtails on this offer)
-const {getOfferDetails} = require('../../database/queries/offers/getOfferDetails')
-module.exports = (req, res) => {
-  getOfferDetails(req.params.offerId)
-  .then((result) => {
-    res.send({
-      error:null,
-      data:result.rows
-    })  
-  }).catch((err) => {
-    next({code : 500 , msg:'internal server error'})
-  });
-    // res.send(' get offer details ');
-  };
+const { getOffer } = require('./../../database/queries/offers/getOfferId');
+
+module.exports = (req, res, next) => {
+  console.log('getOfferDetaiils')
+  const { offerId } = req.params;
+  getOffer(offerId)
+    .then(({ rows }) => res.status(200).send({ error: null, data: rows }))
+    .catch(err => next(err));
+};
