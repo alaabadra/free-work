@@ -20,5 +20,5 @@ export {
   PageNotFound,
   MyApplications,
   SavedOffers,
-  OfferDetails
+  OfferDetails,
 };

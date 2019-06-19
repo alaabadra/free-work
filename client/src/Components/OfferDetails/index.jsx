@@ -23,37 +23,37 @@ export default class OfferDetails extends Component {
   componentDidMount() {
     // from localStorage
     const userInfo = {
-      id: 1,
+      id: 2,
       fullName: 'Ayman AlQoqa',
       username: 'Ayman321396',
       avatar:
         'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
     };
 
-    console.log(this.props.userInfo);
-    console.log('old state',this.state);
+    // console.log(this.props.userInfo);
+    // console.log('old state',this.state);
     
     this.setState({ userInfo }, () =>{
 
-      console.log('new ', this.state);
+      // console.log('new ', this.state);
     });
-    console.log('proooooooops',this.props);
+    // console.log('proooooooops',this.props);
   
     // const {
     //   // eslint-disable-next-line react/prop-types
     //   params: { offerId },
     // } = this.props.match;
    const {offerId}= this.props.match.params;
-   console.log('oooooooooooooooooooo',{offerId});
-   console.log('state before offerId',this.state);
+  //  console.log('oooooooooooooooooooo',{offerId});
+  //  console.log('state before offerId',this.state);
    
     this.setState({ offerId },()=>{
-      console.log('state after offerId',this.state);
+      // console.log('state after offerId',this.state);
       
     });
     
     // fetch offerDetails by offer_id
-    console.log(1111111111,offerId)
+    // console.log(1111111111,offerId)
     fetch(`/api/v1/offer/${offerId}`, {
       method: 'GET',
     })
@@ -61,7 +61,7 @@ export default class OfferDetails extends Component {
       .then(res => {
         
         this.setState({ offer: res.data[0] })
-        console.log('hhhhhhhh',this.state.offer);
+        // console.log('hhhhhhhh',this.state.offer);
         
       })
       .catch((err) =>
@@ -83,21 +83,25 @@ export default class OfferDetails extends Component {
       method: 'GET',
     })
       .then(response => response.json())
-      .then(res => this.setState({ applications: res }))
-      .catch(() =>
-        this.setState(
-          {
-            showWrongAlert: false,
-          },
-          () =>
-            setTimeout(() => {
-              this.setState({ showWrongAlert: true });
-            }, 5000)
-        )
-      );
+      .then(res => this.setState({ applications: res.data[0]},()=>{
+        console.log('offer app',this.state.applications);
+        
+      }))
+      .catch((err) => console.log(err))
+      
+        // this.setState(
+        //   {
+        //     showWrongAlert: false,
+        //   },
+        //   () =>
+        //     setTimeout(() => {
+        //       this.setState({ showWrongAlert: true });
+        //     }, 5000)
+        // )
+// console.log('staaaart');
 
     const { id } = userInfo;
-    // fetch myApplication by userId and offerId
+    // // fetch myApplication by userId and offerId
     fetch(`/api/v1/${id}/my-applications/${offerId}`, {
       method: 'GET',
     })
@@ -105,18 +109,23 @@ export default class OfferDetails extends Component {
       .then(myApplication => {
         console.log('myyyyyy',myApplication);
         
-        this.setState({ myApplication })})
-      .catch(() =>
-        this.setState(
-          {
-            showWrongAlert: true,
-          },
-          () =>
-            setTimeout(() => {
-              this.setState({ showWrongAlert: false });
-            }, 5000)
-        )
-      );
+        this.setState({ myApplication },()=>{
+          console.log(this.state.myApplication);
+          
+        })
+      })
+      .catch(err=>console.log('errrrr',err))
+        // () =>
+        // this.setState(
+        //   {
+        //     showWrongAlert: true,
+        //   },
+        //   () =>
+        //     setTimeout(() => {
+        //       this.setState({ showWrongAlert: false });
+        //     }, 5000)
+        // )
+      // );
   }
 
   handleEndContract = () => {
@@ -133,34 +142,39 @@ export default class OfferDetails extends Component {
       showWrongAlert,
     } = this.state;
     const { data } = applications;
+    // console.log('applications',applications);
+
+    
     return (
+      
       <>
-        {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
-        {console.log('ggggggggggggggggggggggggg')}
+        {/* {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>} */}
+        {/* {console.log('ggggggggggggggggggggggggg')} */}
          {/* {console.log(offer.length)} */}
         {offer  ? (
         
           
           <Container className="page__container">
-            {console.log('iddd',this.state.offer)}
+            {console.log('offerrrr',this.state.offer)}
+
             <Row>
               <Col>
                 <span>
                 {this.state.offer.position}
-                  {console.log(this.state.offer.position)}
+                  {/* {console.log(this.state.offer.position)} */}
                 </span>
                 <p>{this.state.offer.title}</p>
               </Col>
-              {console.log(offer.member_id)
+              {/* {console.log(offer.member_id) */}
               }
-               {console.log(userInfo.id)
+               {/* {console.log(userInfo.id) */}
               }
               {offer.member_id === userInfo.id && (
                 <>
                   {/* <span className={`status__${statusColor(offer[0].status)}`}> */}
                     {offer.status}
                   {/* </span> */}
-                  {console.log(offer.status)}
+                  {/* {console.log(offer.status)} */}
                   
                   {offer && offer && offer.status === 'completed' ? (
                     <Button
@@ -175,7 +189,7 @@ export default class OfferDetails extends Component {
               )}
             </Row>
              {/* {this.state.offer.id} */}
-             {console.log(offer.description)}
+             {/* {console.log(offer.description)} */}
         <Row>
           <Col>
                     <Row>
@@ -191,20 +205,73 @@ export default class OfferDetails extends Component {
           </Col>
         </Row>
         <Row>
-          {console.log(offer.member_id)}
-          {console.log(userInfo.id)}
           {offer.member_id === userInfo.id ? (
 
             <>
               <Row>
                 Application
               </Row>
+              <Col>
+       
+              {applications.data && 
+              
+              data.map(item=>{
+                // console.log('inside offer app',this.state.applications.data);
+                return(
+                  <ApplicationCard 
+                  viewProfile 
+                  hireMe = {offer.status!=='finished'}
+                  defaultavatar={userInfo.avatar}
+                  key={Math.random()}
+                  application = {item}
+                  />
+                  
+                )
+              })
+              }
+              {/* no app */}
+              {
+                !applications||
+                (!applications.data&&(
+                  <>
+                  <span>there  is no app</span>
+                  </>
+                ))
+              }
+              </Col>
+              {console.log(' apppppp',applications)}
+              {console.log(' appppppbbbbbbbbbbb',this.state.applications)}
 
+              {console.log('my apppppp',myApplication)}
+              <div>{applications}</div>
+              {/* <div>{applications.avatar}</div>
+              <div>{applications.proposal}</div> */}
             </>
-          ):null}
+          ):(
+            <>
+            
+            
+            {myApplication&&
+            myApplication.data &&
+      (
           
-        </Row>
-         
+        <>
+              <div>{console.log('mdaataaa',myApplication.data[0])}</div>
+        {/* <p>{myApplication.data[0]}</p> */}
+             </>
+
+              // <>
+              // <ApplicationCard 
+              // key={Math.random()}
+              // application={myApplication.data[0]}
+              // />
+              // </>
+            )
+            }
+            </>
+          )}
+          
+        </Row>        
           </Container>
         ) : (
           <PageNotFound />
