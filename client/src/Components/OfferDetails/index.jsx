@@ -29,53 +29,32 @@ export default class OfferDetails extends Component {
       avatar:
         'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
     };
+    // console.log('before userInfo in state ', this.state);
+    this.setState({ userInfo }, () => {
 
-    // console.log(this.props.userInfo);
-    // console.log('old state',this.state);
-    
-    this.setState({ userInfo }, () =>{
-
-      // console.log('new ', this.state);
+      // console.log('after userInfo in state ', this.state);
     });
     // console.log('proooooooops',this.props);
-  
-    // const {
-    //   // eslint-disable-next-line react/prop-types
-    //   params: { offerId },
-    // } = this.props.match;
-   const {offerId}= this.props.match.params;
-  //  console.log('oooooooooooooooooooo',{offerId});
-  //  console.log('state before offerId',this.state);
-   
-    this.setState({ offerId },()=>{
+    const { offerId } = this.props.match.params;
+    //  console.log('state before offerId',this.state);
+
+    this.setState({ offerId }, () => {
       // console.log('state after offerId',this.state);
-      
+
     });
-    
-    // fetch offerDetails by offer_id
-    // console.log(1111111111,offerId)
+
     fetch(`/api/v1/offer/${offerId}`, {
       method: 'GET',
     })
-      .then(res =>res.json() )
+      .then(res => res.json())
       .then(res => {
-        
+
         this.setState({ offer: res.data[0] })
-        // console.log('hhhhhhhh',this.state.offer);
-        
+        console.log('fetch offer', this.state.offer);
       })
-      .catch((err) =>
-        {
-          console.log(333333333333, err);
-          this.setState(
-          {
-            showWrongAlert: false,
-          },
-          () =>
-            setTimeout(() => {
-              this.setState({ showWrongAlert: false });
-            }, 5000)
-        )}
+      .catch((err) => {
+        console.log('errCatch offer', err);
+      }
       );
 
     // fetch applications by offerId and save it in state
@@ -83,22 +62,11 @@ export default class OfferDetails extends Component {
       method: 'GET',
     })
       .then(response => response.json())
-      .then(res => this.setState({ applications: res.data[0]},()=>{
-        console.log('offer app',this.state.applications);
-        
+      .then(res => this.setState({ applications: res.data }, () => {
+        console.log(' fetch offer app', this.state.applications);
+
       }))
-      .catch((err) => console.log(err))
-      
-        // this.setState(
-        //   {
-        //     showWrongAlert: false,
-        //   },
-        //   () =>
-        //     setTimeout(() => {
-        //       this.setState({ showWrongAlert: true });
-        //     }, 5000)
-        // )
-// console.log('staaaart');
+      .catch((err) => console.log('err catch app', err))
 
     const { id } = userInfo;
     // // fetch myApplication by userId and offerId
@@ -106,26 +74,13 @@ export default class OfferDetails extends Component {
       method: 'GET',
     })
       .then(response => response.json())
-      .then(myApplication => {
-        console.log('myyyyyy',myApplication);
-        
-        this.setState({ myApplication },()=>{
-          console.log(this.state.myApplication);
-          
+      .then(res => {
+        this.setState({ myApplication: res.data[0] }, () => {
+          console.log('fetch my applications', this.state.myApplication);
+
         })
       })
-      .catch(err=>console.log('errrrr',err))
-        // () =>
-        // this.setState(
-        //   {
-        //     showWrongAlert: true,
-        //   },
-        //   () =>
-        //     setTimeout(() => {
-        //       this.setState({ showWrongAlert: false });
-        //     }, 5000)
-        // )
-      // );
+      .catch(err => console.log('err Catch my app', err))
   }
 
   handleEndContract = () => {
@@ -141,41 +96,27 @@ export default class OfferDetails extends Component {
       myApplication,
       showWrongAlert,
     } = this.state;
-    const { data } = applications;
-    // console.log('applications',applications);
-
-    
+    console.log('applections',applications)
     return (
-      
-      <>
-        {/* {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>} */}
-        {/* {console.log('ggggggggggggggggggggggggg')} */}
-         {/* {console.log(offer.length)} */}
-        {offer  ? (
-        
-          
-          <Container className="page__container">
-            {console.log('offerrrr',this.state.offer)}
 
+      <>
+        {console.log('offer in render', offer)}
+        {offer ? (
+          <Container className="page__container">
             <Row>
               <Col>
                 <span>
-                {this.state.offer.position}
-                  {/* {console.log(this.state.offer.position)} */}
+                  {this.state.offer.position}
                 </span>
                 <p>{this.state.offer.title}</p>
               </Col>
-              {/* {console.log(offer.member_id) */}
+              {console.log('member_id in offer', offer.member_id)
               }
-               {/* {console.log(userInfo.id) */}
+              {console.log('id in userInfo', userInfo.id)
               }
               {offer.member_id === userInfo.id && (
                 <>
-                  {/* <span className={`status__${statusColor(offer[0].status)}`}> */}
-                    {offer.status}
-                  {/* </span> */}
-                  {/* {console.log(offer.status)} */}
-                  
+                  {offer.status}
                   {offer && offer && offer.status === 'completed' ? (
                     <Button
                       className="offet-details__end-button"
@@ -188,94 +129,101 @@ export default class OfferDetails extends Component {
                 </>
               )}
             </Row>
-             {/* {this.state.offer.id} */}
-             {/* {console.log(offer.description)} */}
-        <Row>
-          <Col>
-                    <Row>
-                      <p>{offer.description}</p>
-                    
-                      <Col>
-                        <div>
-                        <SideCard title="skills" items={offer.skills} />
-         <SideCard title="offer type" items={offer.offer_types} />
-                        </div>
-                      </Col>
-                    </Row>
-          </Col>
-        </Row>
-        <Row>
-          {offer.member_id === userInfo.id ? (
-
-            <>
-              <Row>
-                Application
-              </Row>
+            <Row>
               <Col>
-       
-              {applications.data && 
-              
-              data.map(item=>{
-                // console.log('inside offer app',this.state.applications.data);
-                return(
-                  <ApplicationCard 
-                  viewProfile 
-                  hireMe = {offer.status!=='finished'}
-                  defaultavatar={userInfo.avatar}
-                  key={Math.random()}
-                  application = {item}
-                  />
-                  
-                )
-              })
-              }
-              {/* no app */}
-              {
-                !applications||
-                (!applications.data&&(
-                  <>
-                  <span>there  is no app</span>
-                  </>
-                ))
-              }
+                <Row>
+                  <p>{offer.description}</p>
+                  <Col>
+                    <div>
+                      <SideCard title="skills" items={offer.skills} />
+                      <SideCard title="offer type" items={offer.offer_types} />
+                    </div>
+                  </Col>
+                </Row>
               </Col>
-              {console.log(' apppppp',applications)}
-              {console.log(' appppppbbbbbbbbbbb',this.state.applications)}
+            </Row>
+            <Row>
+              {offer.member_id === userInfo.id ? (
+                <>
+                  <Row>
+                    Application
+              </Row>
+                  <Col>
+                    {applications &&
+                  applications.map(item => {
+                        // console.log(' offer app in render', this.state.applications);
+                        return (
+                          <>
+                            <ApplicationCard
+                              viewProfile
+                              hireMe={offer.status !== 'finished'}
+                              defaultavatar={userInfo.avatar}
+                              key={Math.random()}
+                              application={item}
+                            />
+                            {/* <div>othman</div> */}
+                            {/* <div>{item.toString()}</div> */}
+                            {/* <div>{applications.username}</div> */}
+                            {console.log('oooooooooooffffferr apppp', item)
+                            }
 
-              {console.log('my apppppp',myApplication)}
-              <div>{applications}</div>
-              {/* <div>{applications.avatar}</div>
-              <div>{applications.proposal}</div> */}
-            </>
-          ):(
-            <>
-            
-            
-            {myApplication&&
-            myApplication.data &&
-      (
-          
-        <>
-              <div>{console.log('mdaataaa',myApplication.data[0])}</div>
-        {/* <p>{myApplication.data[0]}</p> */}
-             </>
+                          </>
+                        )
+                      })
+                    }
+                  </Col>
 
-              // <>
-              // <ApplicationCard 
-              // key={Math.random()}
-              // application={myApplication.data[0]}
-              // />
-              // </>
-            )
-            }
-            </>
-          )}
-          
-        </Row>        
+                  {/* no app */}
+                  {
+                    !applications ||
+                    (!applications.data && (
+                      <>
+                        {console.log('not app', applications)}
+
+                        <span>there  is no app</span>
+                      </>
+                    ))
+                  }
+                  {/* {console.log(' apppppp', applications.username)}
+                  {console.log(' appppppbbbbbbbbbbb', this.state.applications)} */}
+
+                  {console.log('my apppppp', myApplication)}
+                  {/* <div>{applications}</div> */}
+                  {/* <div>hgj {myApplication.pr}</div> */}
+                  {/* <div>{applications.avatar}</div>
+                  <div>{applications.proposal}</div> */}
+                </>
+              ) : (
+                  <>
+
+
+                    {myApplication &&
+                      (
+
+                        <>
+                          {/* <div>{my}</div> */}
+                          <p>{myApplication.username}</p>
+                          <p>{myApplication.avatar}</p>
+
+
+                        </>
+
+                        // <>
+                        // <ApplicationCard 
+                        // key={Math.random()}
+                        // application={myApplication.data[0]}
+                        // />
+                        // </>
+                      )
+                    }
+                  </>
+                )}
+
+            </Row>
           </Container>
         ) : (
-          <PageNotFound />
-        )}
+            <PageNotFound />
+          )}
       </>
     );
   }

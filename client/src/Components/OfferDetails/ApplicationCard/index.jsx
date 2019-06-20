@@ -10,26 +10,28 @@ import './style.css';
 import { Prev } from 'react-bootstrap/PageItem';
 
 class ApplicationCard extends Component {
+  
   state = {
     application: '',
     userInfo: '',
     showWrongAlert: false,
   };
-
+  
   componentDidMount() {
     // from localStorage
+    {console.log('componentdidmount applicationCard',this.props)}
     const userInfo = {
       id: 1,
       fullName: 'Ayman AlQoqa',
       username: 'Ayman321396',
       avatar:
-        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
+      'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
     };
     this.setState({ userInfo });
     const { application } = this.props;
     this.setState({ application });
   }
-
+  
   handleProfile = () => {
     console.log(this.props);
     
@@ -160,14 +162,15 @@ class ApplicationCard extends Component {
 
   render() {
     const {  match } = this.props;
+    const { application, userInfo, showWrongAlert } = this.state;
     const { member_id } = application;
-    const {id} = userInfo
+    const {id} = this.state.userInfo
     const {
         
         params: { offerId },
       } = match;
-    const { application, userInfo, showWrongAlert } = this.state;
     const { defaultAvatar, viewProfile, hireMe } = this.props;
+    console.log('render applicarionCard');
     return (
       <>
         {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
